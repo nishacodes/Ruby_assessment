@@ -103,11 +103,7 @@ school[:instructors].each do |hash|
 	hash[:subject] if hash[:name] == instructor
 end
 
-# 3i. THE FOLLOWING CODE SHOULD PRINT THIS STATEMENT:
-	# Happy Funtime School is the best school in NYC. The instructors are awesome -- 
-	# Blake, who lives for being awesome, Ashley who lives for being better than Blake, Jeff who lives for karoake. 
-	# The students of the summer session work hard, but poor Frank is struggling. 
-	# Their grades are as follows. Marissa: B, Frank: F, Sophie: C, Bob: B.
+# 3i. 
 
 school.each do |key, value|
 	if value.class == String
@@ -121,23 +117,6 @@ school.each do |key, value|
 		end
 	end
 end
-
-
-# # Note: the punctation is a bit off.
-
-# string= "#{school[:name]} is the best school in #{school[:location]}. The instructors are awesome --"
-
-# school[:instructors].each do |x|
-# 		string << " " << "#{x[:name]}, who lives for #{x[:subject]},"
-# end
-
-# string << " The students of the #{school[:session]} session work hard, but poor #{school[:students][1][:name]} is struggling. Their grades are as follows. "
-
-# school[:students].each do |x|
-# 		string << "" << "#{x[:name]}: #{x[:grade]}, "
-# end
-
-# puts string
 
 
 # 4. METHODS
@@ -192,11 +171,11 @@ SCHOOL = {
 
 # 5. OBJECT ORIENTATION
 
-
 class School
 	attr_accessor :name, :location, :instructors, :students
 	attr_reader :ranking
 
+	# I KEEP GETTING AN UNINITIALIZED CONSTANT ERROR AND I DON'T KNOW WHY!!!!
 	SCHOOLS = []
 	
 	def initialize (name, location, ranking) 
@@ -247,10 +226,10 @@ class Student
 end
 
 class School
-
 	attr_accessor :name, :location, :instructors, :students
 	attr_reader :ranking
 
+	# I KEEP GETTING AN UNINITIALIZED CONSTANT ERROR AND I DON'T KNOW WHY!!!!
 	SCHOOLS = [] 
 	
 	def initialize (name, location, ranking, instructors=[], students=[]) 
