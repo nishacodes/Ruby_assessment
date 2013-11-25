@@ -169,8 +169,8 @@ SCHOOL = {
 
 	# 4b. updates the instructors subject, given name and new subject
 	def update_subject(instructor_name, new_subject)
-		SCHOOL[:instructors].each do |x|
-			x[:subject]=new_subject if x[:name]==instructor_name
+		SCHOOL[:instructors].each do |hash|
+			hash[:subject]=new_subject if hash[:name]==instructor_name
 		end
 	end
 
@@ -178,14 +178,14 @@ SCHOOL = {
 
 	# 4c. adds a new student to the students array
 	def add_student(student_name, student_grade)
-		@school[:students] << {:name=> student_name, :grade=>student_grade}
+		SCHOOL[:students] << {:name => student_name, :grade => student_grade}
 	end
 
 	add_student("Nisha","A")
 
 	# 4d. adds a new key at the top level of the school hash :ranking=>1
 	def add_key(key,value)   
-		@school[key]=[value]
+		SCHOOL[key]=[value]
 	end
 	
 	add_key(:ranking,1)
@@ -197,7 +197,7 @@ class School
 	attr_accessor :name, :location, :instructors, :students
 	attr_reader :ranking
 
-	SCHOOLS = [] 
+	SCHOOLS = []
 	
 	def initialize (name, location, ranking) 
 		@name = name
@@ -208,21 +208,22 @@ class School
 		SCHOOLS << self 
 	end
 	
-	# 5d. sets the ranking
 	def set_ranking(ranking)
 		@ranking = ranking 
 	end
 
-	# 5e. adds a student to the school given name, grade and semester
 	def add_student(name, grade, semester)
 		@students << {:name=>name, :grade=>grade, :semester=>semester}
 	end
 
-	# 5e. removes a student given a name
 	def remove_student(name)
 		@students.each do |hash|
 			@students.delete(hash) if hash[:name]==name
 		end
+	end
+
+	def self.reset
+		SCHOOLS.clear
 	end
 end
 
@@ -238,76 +239,78 @@ flatironschool.remove_student("nisha")
 class Student 
 	attr_accessor :name, :grade
 
-	def initialize (name,grade)
+	def initialize (name,grade,semester)
 		@name = name
 		@grade = grade
+		@semester = semester
 	end
 end
 
 class School
-	attr_accessor :name, :location, :instructors, :students, :student_name
+
+	attr_accessor :name, :location, :instructors, :students
 	attr_reader :ranking
 
 	SCHOOLS = [] 
 	
-	def initialize (name, location, ranking) 
+	def initialize (name, location, ranking, instructors=[], students=[]) 
 		@name = name
 		@location = location
 		@ranking = ranking
-		@instructors = []
-		@students = []
+		@instructors = instructors
+		@students = students
 		SCHOOLS << self 
 	end
 	
-	# sets the ranking
 	def set_ranking(ranking)
 		@ranking = ranking 
 	end
 
-	# adds a student to the school given name, grade and semester
-	def add_student(*student)
-		# @students << student
+	def add_student(studentobject)
+		@students << studentobject
 	end
 
-	# removes a student given a name 
 	def remove_student(student_name)
 		@students.each do |student|
 			@students.delete(student) if student.name==student_name
 		end
 	end
 
-	# finds a student by name and returns the student object
 	def find_student(student_name)
 		@students.each do |student|
 			puts student.name if student.name == student_name
 		end
 	end
+	
+	def self.reset
+		SCHOOLS.clear
+	end
 end
 
-student1 = Student.new("Nisha","A")                  # creates a new student object called student1
-student2 = Student.new("Joe","A")                    # creates a new student object called student2
+student1 = Student.new("Nisha","A","winter")         # creates a new student object called student1
+student2 = Student.new("Joe","A","summer")           # creates a new student object called student2
 flatiron = School.new("Flatiron School","NYC",1)     # creates a new school object called flatiron
 flatiron.add_student(student1)  
 flatiron.add_student(student2)                       # adds both students to the students array
 student = flatiron.find_student("Joe")               # returns the student object with name "Joe"
-flatiron.remove_student("Joe")                       # removes stude with name "Joe"
+flatiron.remove_student("Nisha")                     # removes stude with name "Joe"
 
 
 # 7. SELF
 
 # 7a
-# hello
-# Student
+hello
+Student
 
 # 7b
-# Student
+Student
 
 # 7c
-# nil
+object id
 
 # 7d
-# Student
+object id
 
 # 7e
-# goodbye
+goodbye
 
