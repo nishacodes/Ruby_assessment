@@ -142,8 +142,8 @@ end
 
 # 4. METHODS
 
-# define the variable school
-@school = { 
+# define SCHOOL as a constant to use in all of the below methods
+SCHOOL = { 
 	:name => "Happy Funtime School",
 	:location => "NYC",
 	:instructors => [ 
@@ -160,8 +160,8 @@ end
 }
 	# 4a. returns the grade of a student, given the student's name
 	def student_grade(student_name)
-		@school[:students].each do |x|
-			return x[:grade] if x[:name]==student_name
+		SCHOOL[:students].each do |hash|
+			return hash[:grade] if hash[:name]==student_name
 		end
 	end
 
@@ -169,7 +169,7 @@ end
 
 	# 4b. updates the instructors subject, given name and new subject
 	def update_subject(instructor_name, new_subject)
-		@school[:instructors].each do |x|
+		SCHOOL[:instructors].each do |x|
 			x[:subject]=new_subject if x[:name]==instructor_name
 		end
 	end
